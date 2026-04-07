@@ -1,8 +1,13 @@
 import "./App.css";
+import RetriveSubmittedData from "./RetriveSubmittedData";
 
 function App() {
   return (
     <div className="App-container-fluid">
+      <div className="weather">
+        <RetriveSubmittedData defaultCity="Tokyo"></RetriveSubmittedData>
+      </div>
+
       <footer>
         This project was coded by{" "}
         <a href="https://github.com/Magda0006" target="blank">
