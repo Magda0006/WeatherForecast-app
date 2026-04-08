@@ -55,7 +55,7 @@ function CurrentDay(props) {
             | F°
           </span>
         </div>
-        <div className="extraDetails col-6">
+        <div className="extraDetails col-sm-6">
           <ul>
             <li>Humidity: {forecast.today.humidity}%</li>
             <li>Wind: {forecast.today.wind} Km/h</li>
