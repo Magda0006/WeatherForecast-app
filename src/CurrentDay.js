@@ -17,7 +17,7 @@ function CurrentDay(props) {
   if (props.unit === "metric") {
     return (
       <div className="row">
-        <div className="col-6">
+        <div className="col-sm-6 today-icon">
           <img
             className=""
             alt={forecast.today.description}
@@ -30,7 +30,7 @@ function CurrentDay(props) {
             </a>
           </span>
         </div>
-        <div className="col-6">
+        <div className="extraDetails col-sm-6">
           <ul>
             <li>Humidity: {forecast.today.humidity}%</li>
             <li>Wind: {forecast.today.wind} Km/h</li>

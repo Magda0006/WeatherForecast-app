@@ -5,14 +5,16 @@ import Forecast from "./Forecast.js";
 
 function WeatherData(props) {
   return (
-    <div>
-      <Title forecast={props.forecast} />
-      <div className="#">
-        <CurrentDay
-          forecast={props.forecast}
-          unit={props.unit}
-          setUnit={props.setUnit}
-        />
+    <div className="weatherData">
+      <div className="currentDayWeatherData">
+        <Title forecast={props.forecast} />
+        <div>
+          <CurrentDay
+            forecast={props.forecast}
+            unit={props.unit}
+            setUnit={props.setUnit}
+          />
+        </div>
         <Forecast forecast={props.forecast} />
       </div>
     </div>
