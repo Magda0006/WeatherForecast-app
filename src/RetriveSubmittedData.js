@@ -1,9 +1,11 @@
 import axios from "axios";
 import React, { useState } from "react";
+import WeatherData from "./WeatherData";
 
 export default function RetriveSubmittedData(props) {
   const [city, setCity] = useState(props.defaultCity);
   const [forecast, setForecast] = useState({ submitted: false });
+  const [unit, setUnit] = useState("metric");
 
   function getCity() {
     let apiUrl = `https://api.shecodes.io/weather/v1/forecast?query=${city}&key=2td2983oa81aa7bb308858f488f7ba0c&units=${unit}`;
@@ -105,6 +107,7 @@ export default function RetriveSubmittedData(props) {
             </div>
           </div>
         </form>
+        <WeatherData forecast={forecast} unit={unit} setUnit={setUnit} />
       </div>
     );
   } else getCity();
