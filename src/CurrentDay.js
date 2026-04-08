@@ -41,7 +41,7 @@ function CurrentDay(props) {
   } else {
     return (
       <div className="row">
-        <div className="col-6">
+        <div className="col-sm-6 today-icon">
           <img
             className=""
             alt={forecast.today.description}
