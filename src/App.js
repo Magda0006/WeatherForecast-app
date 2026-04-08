@@ -3,7 +3,7 @@ import RetriveSubmittedData from "./RetriveSubmittedData";
 
 function App() {
   return (
-    <div className="App-container-fluid">
+    <div className="App container-fluid">
       <div className="weather">
         <RetriveSubmittedData defaultCity="Tokyo"></RetriveSubmittedData>
       </div>
