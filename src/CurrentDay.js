@@ -1,5 +1,5 @@
 function CurrentDay(props) {
-  const forecast = props.forecast;
+  const weather = props.weather;
 
   function changeToFahrenheit(event) {
     event.preventDefault();
@@ -10,7 +10,7 @@ function CurrentDay(props) {
     props.setUnit("metric");
   }
   function getFahrenheitTemperature() {
-    let celsius = forecast.today.temperature;
+    let celsius = weather.temperature;
     let fahrenheitTemperature = Math.round((celsius * 9) / 5 + 32);
     return fahrenheitTemperature;
   }
@@ -18,13 +18,9 @@ function CurrentDay(props) {
     return (
       <div className="row">
         <div className="col-sm-6 today-icon">
-          <img
-            className=""
-            alt={forecast.today.description}
-            src={forecast.today.icon}
-          />
+          <img className="" alt={weather.description} src={weather.icon} />
           <span>
-            {Math.round(forecast.today.temperature)} C° |{" "}
+            {weather.temperature} C° |{" "}
             <a href="/" onClick={changeToFahrenheit}>
               F°
             </a>
@@ -32,8 +28,8 @@ function CurrentDay(props) {
         </div>
         <div className="extraDetails col-sm-6">
           <ul>
-            <li>Humidity: {forecast.today.humidity}%</li>
-            <li>Wind: {forecast.today.wind} Km/h</li>
+            <li>Humidity: {weather.humidity}%</li>
+            <li>Wind: {weather.wind} Km/h</li>
           </ul>
         </div>
       </div>
@@ -42,11 +38,7 @@ function CurrentDay(props) {
     return (
       <div className="row">
         <div className="col-sm-6 today-icon">
-          <img
-            className=""
-            alt={forecast.today.description}
-            src={forecast.today.icon}
-          />
+          <img className="" alt={weather.description} src={weather.icon} />
           <span>
             {getFahrenheitTemperature()}{" "}
             <a href="/" onClick={changeToCelsius}>
@@ -57,8 +49,8 @@ function CurrentDay(props) {
         </div>
         <div className="extraDetails col-sm-6">
           <ul>
-            <li>Humidity: {forecast.today.humidity}%</li>
-            <li>Wind: {forecast.today.wind} Km/h</li>
+            <li>Humidity: {weather.humidity}%</li>
+            <li>Wind: {weather.wind} Km/h</li>
           </ul>
         </div>
       </div>

@@ -4,75 +4,28 @@ import WeatherData from "./WeatherData";
 
 export default function RetriveSubmittedData(props) {
   const [city, setCity] = useState(props.defaultCity);
-  const [forecast, setForecast] = useState({ submitted: false });
+  const [weather, setWeather] = useState({ submitted: false });
   const [unit, setUnit] = useState("metric");
 
   function getCity() {
-    let apiUrl = `https://api.shecodes.io/weather/v1/forecast?query=${city}&key=2td2983oa81aa7bb308858f488f7ba0c&units=${unit}`;
+    let apiUrl = `https://api.shecodes.io/weather/v1/current?query=${city}&key=2td2983oa81aa7bb308858f488f7ba0c&units=${unit}`;
     axios.get(apiUrl).then(handleApiResponse);
   }
 
   function handleApiResponse(response) {
-    console.log(response);
-    setForecast({
+    console.log(response.data);
+    setWeather({
       submitted: true,
       city: response.data.city,
-      today: {
-        time: response.data.daily[0].time,
-        temperature: response.data.daily[0].temperature.day,
-        humidity: response.data.daily[0].temperature.humidity,
-        wind: response.data.daily[0].wind.speed,
-        icon: response.data.daily[0].condition.icon_url,
-        description: response.data.daily[0].condition.description,
-      },
-      day2: {
-        time: response.data.daily[1].time,
-        minTemp: response.data.daily[1].temperature.minimum,
-        maxTemp: response.data.daily[1].temperature.maximum,
-        icon: response.data.daily[1].condition.icon_url,
-        description: response.data.daily[1].condition.description,
-      },
-
-      day3: {
-        time: response.data.daily[2].time,
-        minTemp: response.data.daily[2].temperature.minimum,
-        maxTemp: response.data.daily[2].temperature.maximum,
-        icon: response.data.daily[2].condition.icon_url,
-        description: response.data.daily[2].condition.description,
-      },
-
-      day4: {
-        time: response.data.daily[3].time,
-        minTemp: response.data.daily[3].temperature.minimum,
-        maxTemp: response.data.daily[3].temperature.maximum,
-        icon: response.data.daily[3].condition.icon_url,
-        description: response.data.daily[3].condition.description,
-      },
-
-      day5: {
-        time: response.data.daily[4].time,
-        minTemp: response.data.daily[4].temperature.minimum,
-        maxTemp: response.data.daily[4].temperature.maximum,
-        icon: response.data.daily[4].condition.icon_url,
-        description: response.data.daily[4].condition.description,
-      },
-      day6: {
-        time: response.data.daily[5].time,
-        minTemp: response.data.daily[5].temperature.minimum,
-        maxTemp: response.data.daily[5].temperature.maximum,
-        icon: response.data.daily[5].condition.icon_url,
-        description: response.data.daily[5].condition.description,
-      },
-      day7: {
-        time: response.data.daily[6].time,
-        minTemp: response.data.daily[6].temperature.minimum,
-        maxTemp: response.data.daily[6].temperature.maximum,
-        icon: response.data.daily[6].condition.icon_url,
-        description: response.data.daily[6].condition.description,
-      },
+      time: response.data.time,
+      temperature: Math.round(response.data.temperature.current),
+      humidity: response.data.temperature.humidity,
+      wind: Math.round(response.data.wind.speed),
+      description: response.data.condition.description,
+      icon: response.data.condition.icon_url,
     });
 
-    return forecast;
+    return weather;
   }
 
   function handleSubmit(event) {
@@ -84,8 +37,7 @@ export default function RetriveSubmittedData(props) {
     event.preventDefault();
     setCity(event.target.value);
   }
-
-  if (forecast.submitted === true) {
+  if (weather.submitted === true) {
     return (
       <div>
         <form onSubmit={handleSubmit}>
@@ -104,7 +56,12 @@ export default function RetriveSubmittedData(props) {
             </div>
           </div>
         </form>
-        <WeatherData forecast={forecast} unit={unit} setUnit={setUnit} />
+        <WeatherData
+          weather={weather}
+          city={city}
+          unit={unit}
+          setUnit={setUnit}
+        />
       </div>
     );
   } else getCity();
